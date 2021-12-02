@@ -1,4 +1,5 @@
 ﻿using Core;
+using Entities.Concrete;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace Entities
     {
         public int ID { get; set; }
         public decimal ItemPrice { get; set; }
+        public Order Order { get; set; }
         [NotMapped]
         public Dictionary<string, decimal> Discounts { get; set; }
 
@@ -53,7 +55,6 @@ namespace Entities
                     Discounts = JsonConvert.DeserializeObject<Dictionary<string, decimal>>(value);
             }
         }
-
         public decimal TotalCost { get; set; }
 
     }

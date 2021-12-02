@@ -18,16 +18,16 @@ namespace Business
             _orderDal = orderDal;
         }
 
-        public IResult Add(Order product)
+        public IResult Add(Order order)
         {
-            _orderDal.Add(product);
+            _orderDal.Add(order);
             return new SuccessResult(Messages.OrderAdded);
         }
 
 
-        public IResult Update(Order product)
+        public IResult Update(Order order)
         {
-            _orderDal.Update(product);
+            _orderDal.Update(order);
             return new SuccessResult(Messages.OrderUpdated);
         }
     }

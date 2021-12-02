@@ -35,10 +35,15 @@ namespace DataAccess.Migrations
                     b.Property<string>("JsonTaxes")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("OrderID")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("TotalCost")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("OrderID");
 
                     b.ToTable("Billings");
                 });
@@ -68,7 +73,7 @@ namespace DataAccess.Migrations
                     b.Property<int?>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductID")
+                    b.Property<int?>("ProductID")
                         .HasColumnType("int");
 
                     b.Property<int>("Quantity")
@@ -77,14 +82,40 @@ namespace DataAccess.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("nvarchar(max)");
 
+                    b.HasKey("ID");
+
+                    b.HasIndex("CustomerID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("Entities.Concrete.Product", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Stock")
                         .HasColumnType("int");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("CustomerID");
+                    b.ToTable("Products");
+                });
 
-                    b.ToTable("Orders");
+            modelBuilder.Entity("Entities.Billing", b =>
+                {
+                    b.HasOne("Entities.Concrete.Order", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderID");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Order", b =>
@@ -93,7 +124,13 @@ namespace DataAccess.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("CustomerID");
 
+                    b.HasOne("Entities.Concrete.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID");
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Entities.Concrete.Customer", b =>

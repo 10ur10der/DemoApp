@@ -10,7 +10,7 @@ namespace Business
 {
     public interface IOrderService
     {
-        IResult Add(Order product);
-        IResult Update(Order product);
+        IResult Add(Order order);
+        IResult Update(Order order);
     }
 }

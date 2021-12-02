@@ -5,7 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Class1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20211202201752_InitialModels.cs" />
+    <Compile Include="Migrations\20211202201752_InitialModels.Designer.cs" />
+    <Compile Include="Migrations\KotonContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
