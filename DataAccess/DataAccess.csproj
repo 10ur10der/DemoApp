@@ -5,8 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="EntityFramework2\**" />
     <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="EntityFramework2\**" />
     <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="EntityFramework2\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 

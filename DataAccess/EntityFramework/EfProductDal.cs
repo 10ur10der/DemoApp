@@ -7,9 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.DataAccess
+namespace DataAccess.EntityFramework
 {
-    public class EfOrderDal : EfEnityRepositoryBase<Order, KotonContext>, IOrderDal
+     public class EfProductDal : EfEnityRepositoryBase<Product, KotonContext>, IProductDal
     {
+
     }
 }

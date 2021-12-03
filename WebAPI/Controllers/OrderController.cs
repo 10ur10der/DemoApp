@@ -1,4 +1,6 @@
 ﻿using Business;
+using Core.Utilities.Results;
+using Entities;
 using Entities.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,23 +17,36 @@ namespace WebAPI.Controllers
     {
 
         private IOrderService _orderService;
+        private IBillingService _billingService;
+        private IProductService _productService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IBillingService billingService, IProductService productService)
         {
             _orderService = orderService;
+            _billingService = billingService;
+            _productService = productService;
         }
 
         [HttpPost(template: "add")]
         public IActionResult Add(Order order)
         {
-            var result = _orderService.Add(order);
-
-            if (result.Success)
+            IResult result;
+            var prod = _productService.GetById(order.Product.ID);
+            if (prod.Data.Stock > order.Product.Stock)
             {
-
-                return Ok(result.Message);
+                result = _orderService.Add(order);
+                if (result.Success)
+                {
+                    prod.Data.Stock -= order.Quantity;
+                    _productService.Update(prod.Data);
+                    //Billing billing = new Billing();
+                    //_billingService.Create(billing);
+                    return Ok(result.Message);
+                }
+                return BadRequest(result.Message);
             }
-            return BadRequest(result.Message);
+            return BadRequest();
+        
         }
     }
 }

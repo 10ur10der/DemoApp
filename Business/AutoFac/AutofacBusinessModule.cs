@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using DataAccess;
-using DataAccess.DataAccess;
+using DataAccess.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +15,12 @@ namespace Business.AutoFac
         {
             builder.RegisterType<OrderManager>().As<IOrderService>();
             builder.RegisterType<EfOrderDal>().As<IOrderDal>();
+
+            builder.RegisterType<BillingManager>().As<IBillingService>();
+            builder.RegisterType<EfBillingDal>().As<IBillingDal>();
+
+            builder.RegisterType<ProductManger>().As<IProductService>();
+            builder.RegisterType<EfProductDal>().As<IProductDal>();
         }
     }
 }
