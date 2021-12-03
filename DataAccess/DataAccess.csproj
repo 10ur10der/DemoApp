@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="Migrations\20211202201752_InitialModels.cs" />
-    <Compile Include="Migrations\20211202201752_InitialModels.Designer.cs" />
+    <Compile Include="Migrations\20211203152253_InitialCreate.cs" />
+    <Compile Include="Migrations\20211203152253_InitialCreate.Designer.cs" />
     <Compile Include="Migrations\KotonContextModelSnapshot.cs" />
   </ItemGroup>
 

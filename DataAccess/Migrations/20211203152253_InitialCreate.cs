@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class InitialModels : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,7 +20,7 @@ namespace DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Products",
+                name: "Product",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
@@ -30,7 +30,7 @@ namespace DataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Products", x => x.ID);
+                    table.PrimaryKey("PK_Product", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -54,9 +54,9 @@ namespace DataAccess.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Orders_Products_ProductID",
+                        name: "FK_Orders_Product_ProductID",
                         column: x => x.ProductID,
-                        principalTable: "Products",
+                        principalTable: "Product",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -112,7 +112,7 @@ namespace DataAccess.Migrations
                 name: "Customers");
 
             migrationBuilder.DropTable(
-                name: "Products");
+                name: "Product");
         }
     }
 }
